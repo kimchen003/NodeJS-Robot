@@ -1,5 +1,7 @@
 nodeJs 爬虫实例<br>
 
+![](http://www.baidu.com/img/bdlogo.gif) 
+
 使用步骤:<br>
 
 先安装项目依赖包 打开终端输入: `npm install`<br>
