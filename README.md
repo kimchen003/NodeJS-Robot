@@ -7,7 +7,7 @@
 先安装项目依赖包 打开终端输入: `npm install`      
 
 1.打开终端输入 : `node app`       
-2.打开浏览器输入 : [This link](http://localhost:8312/Robot)     
+2.打开浏览器输入 : [http://localhost:8312/Robot](http://localhost:8312/Robot)     
 3.输入你想要下载的网站链接      
 4.文件将会保存到目录中的 "download" 文件夹        
 
