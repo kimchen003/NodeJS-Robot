@@ -1,4 +1,4 @@
-![](http://www.baidu.com/img/bdlogo.gif) 
+![](http://cdnweb.b5m.com/web/cmsphp/article/201506/5baab4b432ec7c1f2b6cdfc32b1563a1.jpg) 
 
 ###nodeJs 爬虫实例<br>
 
