@@ -2,11 +2,7 @@ nodeJs 爬虫实例<br>
 
 使用步骤:<br>
 
-先安装项目依赖包 打开终端输入: <br>
-` ``javascript
-npm install
-` ``javascript
-<br>
+先安装项目依赖包 打开终端输入: ` ``npm install` ``<br>
 
 1.打开终端输入 : node app<br>
 2.打开浏览器输入 : http://localhost:8312/Robot<br>
