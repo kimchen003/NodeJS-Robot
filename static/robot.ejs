@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Node.js爬虫实例</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/socket.io.js"></script>
+</head>
+<body>
+    <h1>Node.js爬虫实例</h1>
+    <h4>请输入你要下载的网站地址:</h4>
+
+    <% if(!url){ %>
+        <form id="from" method="GET" action="/robot">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <input class="submit btn btn-default" type="button" value="开始下载">
+                </span>
+                <input class="url form-control" type="text" placeholder="例如：https://www.baidu.com" name="url" />
+            </div>
+        </form>
+    <% } %>
+
+    <p class="loading">
+        <% if(url){ %>
+                正在加载: <a href='<%= url %>' target="_blank"><%= url %></a>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    <span class="sr-only">80% Complete</span>
+                  </div>
+                </div>
+        <% } %>
+
+    </p>
+
+    <div class="error bg-danger alert alert-dange">
+    </div>
+    <script>
+    //io
+    var io = io();
+
+    //请求区
+    function IsURL(str_url){
+             // return!!str_url.match(/(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g);
+             return true;
+    }
+
+    $(".submit").click(function(){
+        var val = $(".url").val();
+
+        if( IsURL( val ) ){
+            $("#from").submit();
+        }else{
+            alert("请输入合法链接如:http://www.aa.com")
+        }
+    })
+
+    //响应区
+    io.on("send error",function(data){
+        console.log("data.text:"+data.text);
+        $(".error").show();
+        $(".error").append(data.text);
+    });
+
+
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>
