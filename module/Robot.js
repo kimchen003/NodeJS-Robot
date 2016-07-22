@@ -37,6 +37,9 @@ var Robot = function(obj){
     _.CurrentUrlInfo = url.parse(this.targetUrl);
     _.BaseFolder = obj.downloadFile;
     _.CurrentPageOrigin = url.parse(this.targetUrl).protocol +"//"+ url.parse(this.targetUrl).host;
+
+    var linkPart = this.targetUrl.split("/");
+    _.EntryPath = url.parse(linkPart.slice(0,linkPart.length-1).join("/")+"/");
 };
 
 /**
@@ -52,7 +55,7 @@ Robot.prototype.grab = function(){
 
     console.log( ("请求:"+targetUrl).gray );
 
-    //若不是资源保存页面链接
+    //若不是资源链接 保存页面链接以深入嗅探
     if(self.oFiles.fileType(targetUrl).type != "source"){
         _.CurrentPageUrl = targetUrl;
         _.CurrentUrlInfo = url.parse(targetUrl);
@@ -66,8 +69,11 @@ Robot.prototype.grab = function(){
         //修改部分绝对路径为相对路径
         self.oBody.FixedAbsLink(body,function(newBody){
 
+            //页面文件后缀名
+            var suffix = self.oFiles.fileType(_.CurrentPageUrl).suffix;
+
             //获取资源链接并加入队列
-            self.oUrl.getSourceGroup(newBody,function(){
+            self.oUrl.getSourceGroup(newBody,suffix,function(){
 
                 var parse = url.parse(targetUrl);
 

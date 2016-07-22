@@ -15,34 +15,64 @@ var Url = function(){
 /**
  * @desc 获取当前页面的资源链接队列
  *
- * @param str string 页面代码
+ * @param str    string 页面代码
+ * @param suffix string 页面文件后缀名
+ * @param cb     function 结束回调
  */
-Url.prototype.getSourceGroup = function(str,cb){
-    //调整链接后的body
-    var newBody = str;
+Url.prototype.getSourceGroup = function(str,suffix,cb){
 
-    //查找Img标签开头的图片路径
+    //根据不同文件选择嗅探方式
+    switch(suffix){
+        case ".js":
+            //JS 环境下
+            while ((src = _.reg.findSourcePathInJs.exec(str)) != null)  {
+                var parse = url.parse(src[1]);
+                console.log("JS 环境下",src[1])
+                //目前版本暂不加载绝对路径资源
+                if(!Path.isAbsolute(parse.path)){
+                    //js 里的资源链接应该基于“入口页”
+                    console.log("js获取的文件:"+this.Fixed(src[1], _.EntryPath))
+                    _.CurrentUrlQueue.push( this.Fixed(src[1], _.EntryPath)  );
+                }
+            }
+            break
+        case ".css":
+            //CSS 环境下
+            while ((src = _.reg.findSourcePathInCss.exec(str)) != null)  {
+                var parse = url.parse(src[1]);
 
-    //DOM环境下
-    while ((src = _.reg.findSourcePathInDom.exec(str)) != null)  {
+                if(!Path.isAbsolute(parse.path)){
+                    //css 里的资源链接应该基于“当前页”
+                    _.CurrentUrlQueue.push( this.Fixed(src[1],url.parse(_.CurrentPageUrl)) );
+                }
+            }
+            break;
+        case ".html":
+        default :
+            //DOM环境下
+            while ((src = _.reg.findSourcePathInDom.exec(str)) != null)  {
+                var parse = url.parse(src[1]);
+
+                //目前版本暂不加载绝对路径资源
+                if(!Path.isAbsolute(parse.path)){
+                    _.CurrentUrlQueue.push( this.Fixed(src[1]) );
+                }
+            }
+            break;
+    }
+
+
+    //查找音频文件
+    while ((src = _.reg.findSoundPathInFile.exec(str)) != null)  {
         var parse = url.parse(src[1]);
 
         //目前版本暂不加载绝对路径资源
         if(!Path.isAbsolute(parse.path)){
-            _.CurrentUrlQueue.push( this.Fixed(src[1]) );
+            console.log(this.Fixed(src[1], _.EntryPath))
+            //js 里的资源链接应该基于“入口页”
+            _.CurrentUrlQueue.push( this.Fixed(src[1], _.EntryPath)  );
         }
     }
-
-    //CSS环境下
-    while ((src = _.reg.findSourcePathInCss.exec(str)) != null)  {
-        var parse = url.parse(src[1]);
-
-        //目前版本暂不加载绝对路径资源
-        if(!Path.isAbsolute(parse.path)){
-            _.CurrentUrlQueue.push( this.Fixed(src[1],url.parse(_.CurrentPageUrl)) );
-        }
-    }
-
 
     if(cb)cb();
 };

@@ -67,7 +67,11 @@ File.prototype.createFile = function(path,data,targetUrl,cb){
         case "image":
             req(targetUrl).pipe(ws);
             break;
+        case "music":
+            req.get(targetUrl).pipe(ws);
+            break;
         default :
+            //"test"
             ws.write(data);
             break;
     }
@@ -118,6 +122,10 @@ File.prototype.fileType = function(filePath){
     var suffix = Path.extname(filePath);
 
     switch(suffix){
+        case ".mp3":
+            filetype.typeName = "music";
+            filetype.type = "source";
+            break;
         case ".png":
         case ".jpg":
         case ".gif":
@@ -129,6 +137,9 @@ File.prototype.fileType = function(filePath){
             filetype.type = "txt";
             break;
     };
+
+    filetype.suffix = suffix;
+
     return filetype
 };
 
