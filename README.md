@@ -11,19 +11,19 @@
 3.输入你想要下载的网站链接
 4.文件将会保存到目录中的 "download" 文件夹
 
-####版本:version 1.3.0
+####版本:version 1.3.0  
 #####升级内容:
-1.强化嗅探及抓取能力
-2.可以抓取音频格式文件
-#####修复问题:
-1.抓取js中的资源路径不准确
+1.强化嗅探及抓取能力  
+2.可以抓取音频格式文件  
+#####修复问题:  
+1.抓取js中的资源路径不准确  
 
 ####测试成功网站:
-1.http://www.one-pieces-html5.com/
-2.http://www.kundian.net/default.aspx
-3.http://www.one-pieces-html5.com/waibao/crossfire/shakeh5/project/index.html
-4.http://www.one-pieces-html5.com/waibao/cf/index.html
-5.http://www.one-pieces-html5.com/waibao/lol/index.html
+1.http://www.one-pieces-html5.com/  
+2.http://www.kundian.net/default.aspx 
+3.http://www.one-pieces-html5.com/waibao/crossfire/shakeh5/project/index.html 
+4.http://www.one-pieces-html5.com/waibao/cf/index.html  
+5.http://www.one-pieces-html5.com/waibao/lol/index.html 
 
 ####特性:
 1.爬虫特性明细嗅探及抓取同时进行
