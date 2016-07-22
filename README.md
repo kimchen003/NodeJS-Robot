@@ -21,7 +21,7 @@
 ####测试成功网站:
 1.http://www.one-pieces-html5.com/  
 2.http://www.kundian.net/default.aspx 
-3.http://www.one-pieces-html5.com/waibao/crossfire/shakeh5/project/index.html 
+3.http://www.one-pieces-html5.com/waibao/crossfire/shakeh5/project/index.html    
 4.http://www.one-pieces-html5.com/waibao/cf/index.html  
 5.http://www.one-pieces-html5.com/waibao/lol/index.html 
 
@@ -31,8 +31,8 @@
 3.可以以约定规则抓取后端服务生成的页面
 
 ####缺陷:
-1.能抓取的资源相对较少，暂不能抓取如视频 svg font等。
-2.https不兼容
-3.不支持站点内容全抓取，只抓取相对路径资源
+1.能抓取的资源相对较少，暂不能抓取如视频 svg font等。   
+2.https不兼容   
+3.不支持站点内容全抓取，只抓取相对路径资源    
 
 #####(初始版本缺陷相对较多，后续版本将会逐步完善)
