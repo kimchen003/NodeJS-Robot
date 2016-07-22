@@ -21,7 +21,7 @@
 ####测试成功网站:
 1.http://www.one-pieces-html5.com/<br>
 2.http://www.kundian.net/default.aspx<br>
-3.http://www.one-pieces-html5.com/waibao/crossfire/shakeh5/project/index.html<br>   
+3.http://www.one-pieces-html5.com/waibao/crossfire/shakeh5/project/index.html<br>
 4.http://www.one-pieces-html5.com/waibao/cf/index.html<br>
 5.http://www.one-pieces-html5.com/waibao/lol/index.html<br>
 
