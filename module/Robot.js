@@ -8,7 +8,8 @@ var Url = require("./Url");
 var url = require("url");
 var fs = require("fs");
 var Body = require("./Body");
-var colors = require("colors");
+var Console = require("./Console");
+var colors = require('colors');
 
 /**
  * @desc 爬虫类
@@ -19,6 +20,9 @@ var colors = require("colors");
 var Robot = function(obj){
     //入口地址
     this.firstUrl = obj.url || "";
+
+    //日志回调
+    this.log = obj.log;
 
     //报错回调
     this.error = obj.error;
@@ -32,11 +36,14 @@ var Robot = function(obj){
     this.targetUrl = this.oUrl.Fixed(this.firstUrl);
 
     //保存信息
+    _.UserSocket = obj.userSocket;
     _.CurrentPageUrl = this.targetUrl;
     _.CurrentUrlQueue.push(this.targetUrl);
     _.CurrentUrlInfo = url.parse(this.targetUrl);
     _.BaseFolder = obj.downloadFile;
     _.CurrentPageOrigin = url.parse(this.targetUrl).protocol +"//"+ url.parse(this.targetUrl).host;
+
+    _.downloadFile = obj.downloadFile;
 
     var linkPart = this.targetUrl.split("/");
     _.EntryPath = url.parse(linkPart.slice(0,linkPart.length-1).join("/")+"/");
@@ -49,11 +56,11 @@ Robot.prototype.grab = function(){
     if(_.CurrentUrlQueue.length<=0)return;
     var self = this;
 
-    console.log( ("当前队列:"+_.CurrentUrlQueue.length).cyan );
+    Console.log( ("当前队列:"+_.CurrentUrlQueue.length) , "cyan" );
 
     var targetUrl = _.QueueAdvance();
 
-    console.log( ("请求:"+targetUrl).gray );
+    Console.log( ("请求:"+targetUrl) , "gray" );
 
     //若不是资源链接 保存页面链接以深入嗅探
     if(self.oFiles.fileType(targetUrl).type != "source"){

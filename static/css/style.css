@@ -26,6 +26,31 @@ form {
     margin-top: 30px;
     word-break: break-all;
 }
+
 .error {
     display: none;
+}
+.console-log {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    background: #000;
+    padding:10px;
+    color: #fff;
+}
+.logContent {
+    height: 300px;
+    box-sizing:border-box;
+}
+.logContent p {
+    margin:0;
+    word-break: break-all;
+}
+.logContent p:last-child{
+    margin-bottom: 10px;
+}
+.zipWrap {
+    text-align: center;
+}
+.zipWrap img{
+    width: 80px;
 }

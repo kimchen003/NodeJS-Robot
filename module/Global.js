@@ -7,6 +7,10 @@ var Path = require("path");
  * @desc 全局对象
  */
 var Global = {
+    //用户连接对象
+    UserSocket : null,
+    //当前下载目录
+    downloadFile : "",
     //项目版本
     version : "1.0.0",
     //入口地址信息
@@ -21,6 +25,9 @@ var Global = {
     CurrentUrlInfo : null,
     //文件保存目录
     BaseFolder : "",
+    //服务站点地址
+    //webServerLink : "http://www.one-pieces-html5.com/",
+    webServerLink : "http://172.16.82.82/playstation/node/robot/dev/",
     //正则表达式
     reg : {
         //搜索页面引用的资源

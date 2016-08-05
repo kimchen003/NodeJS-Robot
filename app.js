@@ -30,18 +30,28 @@ app.get("/robot",function(req,res){
     });
 });
 
+app.get('/download',function(req,res){
+    var realpath = req.query.zippath;
+    console.log(realpath)
+    res.download(path.resolve(__dirname,realpath),"webpage.zip");
+});
+
 /**
  * @desc io通信
  */
 var user = [];
 io.on("connection",function(socket){
     user.push(socket);
+    //发送用户提取码
+    var eCode = socket.id.replace(/\/|\#/ig,"");
+    socket.emit("send extCode",{code:eCode});
 
     if(oUrl){
         //实例化爬虫
         var robot = new Robot({
+            userSocket : socket,
             url : oUrl,
-            downloadFile : path.resolve(__dirname, "download"),//, socket.id.replace("/#","")),
+            downloadFile : path.resolve(__dirname, "download/"+eCode),//, socket.id.replace("/#","")),
             error : function(err){
                 console.log(err);
                 //翻译 en -> cn
@@ -54,6 +64,10 @@ io.on("connection",function(socket){
         robot.grab();
     }
 });
+
+/**
+ * @desc 记录任务详情
+ */
 
 /**
  * @desc 广播

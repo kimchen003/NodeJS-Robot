@@ -6,13 +6,13 @@ var Path = require('path');
 var url = require('url');
 var _ = require('./Global');
 var req = require("request");
-var colors = require('colors');
+var Console = require("./Console");
+var archiver = require('archiver');
 
 /**
  * @desc 文件操作类
  */
 var File = function(){
-
 };
 
 /**
@@ -54,13 +54,14 @@ File.prototype.createFile = function(path,data,targetUrl,cb){
     //统一回调
     function callback(err){
         if (err){
-            console.log("保存文件错误:"+err);
+            Console.log("保存文件错误:"+err);
         };
         if (cb) cb();
-        //console.log(path+"保存成功!")
+        console.log(path+"保存成功!")
     }
 
     var ws = fs.createWriteStream(path);
+
 
     //保存不同格式的文件
     switch(this.fileType(path).typeName){
@@ -71,16 +72,30 @@ File.prototype.createFile = function(path,data,targetUrl,cb){
             req.get(targetUrl).pipe(ws);
             break;
         default :
-            //"test"
             ws.write(data);
             break;
     }
 
-    //callback();
+    this.zip();
 
-    console.log( ("保存:"+path).green);
-    if(_.CurrentUrlQueue.length==0){
-        console.log( ("当前队列:"+_.CurrentUrlQueue.length).cyan );
+    //callback();
+    Console.log( "保存到:"+path,"green" );
+
+    var hasSay = false;
+    if(_.CurrentUrlQueue.length==0 && !hasSay){
+
+        //Console.log( "当前队列:"+_.CurrentUrlQueue.length,"cyan" );
+        Console.log("完成！！！★★(｡・`ω´･) YEAR ~~★★","yellow");
+
+        var folderName = _.UserSocket.id.replace(/\/|\#/ig,"");
+
+        //显示前端下载地址
+        _.UserSocket.emit("send zip",{
+            src :  "download?zippath="+"download/"+ folderName+".zip",
+            name : folderName+".zip"
+        });
+
+        hasSay = true;
     }
 
 };
@@ -141,6 +156,43 @@ File.prototype.fileType = function(filePath){
     filetype.suffix = suffix;
 
     return filetype
+};
+
+/**
+ * @desc  获取文件名
+ *
+ * @param string 文件路径
+ *
+ * @return string 文件名
+ */
+File.prototype.fileName = function(path){
+    var wrap = path.split("\\");
+
+    var filename = wrap.slice(wrap.length-1, wrap.length).toString("");
+
+    return filename;
+};
+
+
+/**
+ * @desc  压缩到zip
+ *
+ */
+File.prototype.zip = function(){
+    var folderName = _.UserSocket.id.replace(/\/|\#/ig,"");
+
+    var output = fs.createWriteStream('./download/'+folderName+'.zip');
+    var archive = archiver('zip');
+
+    archive.on('error', function(err){
+        throw err;
+    });
+
+    archive.pipe(output);
+    archive.bulk([
+        { src: ['./download/'+folderName+'/**']}
+    ]);
+    archive.finalize();
 };
 
 

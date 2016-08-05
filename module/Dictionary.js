@@ -2,6 +2,7 @@
  * @desc 引用模块
  */
 var http = require("http");
+var Console = require("./Console");
 
 /**
  * @desc 字典类
@@ -26,7 +27,7 @@ Dictionary.prototype.translateByYouDao = function (str,cb) {
         });
 
     }).on('error', function(error) {
-        console.log("翻译报错");
+        Console.log("翻译报错");
     });
 }
 

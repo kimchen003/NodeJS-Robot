@@ -4,6 +4,7 @@
 var _ = require("./Global");
 var url = require("url");
 var Path = require("path");
+var Console = require("./Console");
 
 /**
  * @desc Url操作类
@@ -27,11 +28,11 @@ Url.prototype.getSourceGroup = function(str,suffix,cb){
             //JS 环境下
             while ((src = _.reg.findSourcePathInJs.exec(str)) != null)  {
                 var parse = url.parse(src[1]);
-                console.log("JS 环境下",src[1])
+                Console.log("JS 环境下",src[1])
                 //目前版本暂不加载绝对路径资源
                 if(!Path.isAbsolute(parse.path)){
                     //js 里的资源链接应该基于“入口页”
-                    console.log("js获取的文件:"+this.Fixed(src[1], _.EntryPath))
+                    Console.log("js获取的文件:"+this.Fixed(src[1], _.EntryPath))
                     _.CurrentUrlQueue.push( this.Fixed(src[1], _.EntryPath)  );
                 }
             }
@@ -68,7 +69,7 @@ Url.prototype.getSourceGroup = function(str,suffix,cb){
 
         //目前版本暂不加载绝对路径资源
         if(!Path.isAbsolute(parse.path)){
-            console.log(this.Fixed(src[1], _.EntryPath))
+            Console.log(this.Fixed(src[1], _.EntryPath))
             //js 里的资源链接应该基于“入口页”
             _.CurrentUrlQueue.push( this.Fixed(src[1], _.EntryPath)  );
         }
