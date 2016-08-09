@@ -31,11 +31,11 @@ var Global = {
     //正则表达式
     reg : {
         //搜索页面引用的资源
-        findSourcePathInDom : /[src|href|url]=[\"|\']([^\"\']?([^\"\']*?)\.(css|js|png|jpg|gif|axd))(\?.+)?[\"|\']/ig,
+        findSourcePathInDom : /[url|src|href][\(|\=][\"|\']?(([^\"\'\s]*?)\.(css|js|png|jpg|gif|axd))(\?.+?)?[\"|\']?\)?/ig,
         //搜索CSS文件引用的资源
-        findSourcePathInCss : /url\([\"|\']?(([^\"\']*?)\.?(css|js|png|jpg|gif|axd))(\?.+)?[\"|\']?\)/ig,
+        findSourcePathInCss : /url\([\"|\']?(([^\"\']*?)\.?(css|js|png|jpg|gif|axd))(\?.+?)?[\"|\']?\)/ig,
         //搜索JS文件引用的资源
-        findSourcePathInJs : /[\"|\'](([^\"\']*?)\.(css|js|png|jpg|gif|axd))(\?.+)?[\"|\']/ig,
+        findSourcePathInJs : /[\"|\'](([^\"\']+?)\.(css|js|png|jpg|gif|axd))(\?.+?)?[\"|\']/ig,
         //搜索音频文件
         findSoundPathInFile : /[\"|\'](([^\"\']*?)\.(CD|OGG|MP3|ASF|WMA|WAV|MP3PRO|RM|REAL|APE|MODULE|MIDI|VQ))(\?.+)?[\"|\']/ig,
         //匹配文件版本号
@@ -43,8 +43,20 @@ var Global = {
         //匹配文件名
         findFileName : /\/(\S*?)\..+/i,
         //匹配需要补全的绝对路径
-        findUncompleteAbsPath : /.+[src|href|url]=[\"|\'](\/[^\/].+\.(css|js|png|jpg|gif|axd))(\?.+)?[\"|\']/ig,
+        findUncompleteAbsPath : /.+[src|href|url]=[\"|\'](\/[^\/].+\.(css|js|png|jpg|gif|axd))(\?.+?)?[\"|\']/ig,
+        //匹配页面的编码方式
+        findWebPageChartset : /charset=[\"|\']?(\S+?)[\"|\']/ig,
+        //匹配后端文件后缀
+        findServerFilesSuffix : /\.(php|aspx|shtml)/ig,
+        //匹配html中的基础链接标签
+        findHTMLBaseLinkTag : /\<base.+\/\>/ig
+
     },
+    //丑陋参数(未来将废除)
+    ugly : {
+        //加载完成回调闸门
+        hasSay : false
+    }
 };
 
 /**

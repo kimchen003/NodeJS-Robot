@@ -10,6 +10,7 @@ var server = require('http').Server(app);
 var io = require("socket.io")(server);
 
 var Dictionary = require("./module/Dictionary");
+var Console = require("./module/Console");
 var dictionary = new Dictionary();
 
 /**
@@ -52,8 +53,9 @@ io.on("connection",function(socket){
             userSocket : socket,
             url : oUrl,
             downloadFile : path.resolve(__dirname, "download/"+eCode),//, socket.id.replace("/#","")),
-            error : function(err){
-                console.log(err);
+            error : function(err,path){
+                Console.log(path,"red");
+                Console.log(err.toString(),"red");
                 //翻译 en -> cn
                 dictionary.translateByYouDao(err.toString(),function(cn){
                     socket.emit("send error",{text:cn[0]})

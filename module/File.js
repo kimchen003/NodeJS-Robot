@@ -24,7 +24,7 @@ var File = function(){
  */
 File.prototype.save = function(path,data,targetUrl){
 
-    var path = Path.join(_.BaseFolder,path);
+    var path = Path.join(_.BaseFolder,path).replace(_.reg.findServerFilesSuffix,".html");
 
     var self = this;
     var folderPath = Path.dirname(path);
@@ -50,6 +50,7 @@ File.prototype.save = function(path,data,targetUrl){
  * @param cb   function  回调函数
  */
 File.prototype.createFile = function(path,data,targetUrl,cb){
+    var self = this;
 
     //统一回调
     function callback(err){
@@ -81,21 +82,25 @@ File.prototype.createFile = function(path,data,targetUrl,cb){
     //callback();
     Console.log( "保存到:"+path,"green" );
 
-    var hasSay = false;
-    if(_.CurrentUrlQueue.length==0 && !hasSay){
+    if(_.CurrentUrlQueue.length==0){
 
-        //Console.log( "当前队列:"+_.CurrentUrlQueue.length,"cyan" );
-        Console.log("完成！！！★★(｡・`ω´･) YEAR ~~★★","yellow");
+        if(_.hasSay){
 
-        var folderName = _.UserSocket.id.replace(/\/|\#/ig,"");
+            //Console.log( "当前队列:"+_.CurrentUrlQueue.length,"cyan" );
+            Console.log("完成！！！★★(｡・`ω´･) YEAR ~~★★","yellow","success");
 
-        //显示前端下载地址
-        _.UserSocket.emit("send zip",{
-            src :  "download?zippath="+"download/"+ folderName+".zip",
-            name : folderName+".zip"
-        });
+            var folderName = _.UserSocket.id.replace(/\/|\#/ig,"");
 
-        hasSay = true;
+            //显示前端下载地址
+            _.UserSocket.emit("send zip",{
+                src :  "download?zippath="+"download/"+ folderName+".zip",
+                name : folderName+".zip"
+            });
+
+        }
+
+        _.hasSay = true;
+
     }
 
 };

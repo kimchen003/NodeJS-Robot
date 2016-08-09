@@ -22,6 +22,11 @@
             <img src="image/zip.png" alt="">
             <span>文件名</span>
         </a>
+
+
+        <div>
+            <img src="image/Eggs.gif" width="100%" alt="">
+        </div>
     </div>
 
     <% if(!url){ %>
@@ -92,6 +97,9 @@
     io.on("send log",function(data){
         $(".logContent").append("<p style='color:"+data.color+"'>"+data.log+"</p>");
         $(".console-log").scrollTop(100000000000);
+
+        console.log('%c '+data.log,"color:#333");
+
     });
 
     io.on("send extCode",function(data){

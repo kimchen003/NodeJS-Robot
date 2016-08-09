@@ -17,12 +17,14 @@ var Console = function(){
  * @param string 信息
  * @param string 颜色
  */
-Console.prototype.log = function(message,color){
-    //console.log(message[color]);
+Console.prototype.log = function(message,color,type){
+
+    console.log(message[color]);
 
     _.UserSocket.emit("send log",{
         color : color,
-        log : message
+        log : message,
+        type : type
     });
 }
 

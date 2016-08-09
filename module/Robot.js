@@ -69,15 +69,20 @@ Robot.prototype.grab = function(){
     }
 
     //请求页面
-    req(targetUrl,function(err,res,body){
-        if(err){
-            if(self.error)self.error(err);
-        };
-        //修改部分绝对路径为相对路径
-        self.oBody.FixedAbsLink(body,function(newBody){
+    req({
+        url : targetUrl,
+        encoding : null
+    },function(err,res,body){
 
-            //页面文件后缀名
-            var suffix = self.oFiles.fileType(_.CurrentPageUrl).suffix;
+        if(err){
+            if(self.error)self.error(err,targetUrl);
+        };
+
+        //页面文件后缀名
+        var suffix = self.oFiles.fileType(_.CurrentPageUrl).suffix;
+
+        //修改部分绝对路径为相对路径
+        self.oBody.FixedAbsLink(body,suffix,function(newBody){
 
             //获取资源链接并加入队列
             self.oUrl.getSourceGroup(newBody,suffix,function(){
