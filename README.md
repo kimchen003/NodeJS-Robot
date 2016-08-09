@@ -1,4 +1,4 @@
-![](http://cdnweb.b5m.com/web/cmsphp/article/201506/5baab4b432ec7c1f2b6cdfc32b1563a1.jpg)
+![](http://cdnweb.b5m.com/web/cmsphp/article/201506/5baab4b432ec7c1f2b6cdfc32b1563a1.jpg?v1)
 
 ###nodeJs 爬虫实例
 
@@ -7,14 +7,14 @@
 先安装项目依赖包 打开终端输入: `npm install`
 
 1.打开终端输入 : `node app` <br/>
-![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/server.jpg)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/server.jpg?v1)<br/>
 2.打开浏览器输入 : [http://localhost:8312/Robot](http://localhost:8312/Robot)<br/>
-![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/index.jpg)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/index.jpg?v1)<br/>
 3.输入你想要下载的网站链接<br/>
-![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/loading.jpg)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/loading.jpg?v1)<br/>
 4.下载完成后，点击下载压缩包至本地<br/>
-![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/download.jpg)<br/>
-![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/end.jpg)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/download.jpg?v1)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/end.jpg?v1)<br/>
 
 ####版本:version 1.4.0
 #####升级内容:
