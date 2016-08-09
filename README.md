@@ -7,20 +7,22 @@
 先安装项目依赖包 打开终端输入: `npm install`
 
 1.打开终端输入 : `node app` <br/>
-![](http://www.one-pieces-html5.com/source/node/robot/version1.4.0/server.jpg)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/server.jpg)<br/>
 2.打开浏览器输入 : [http://localhost:8312/Robot](http://localhost:8312/Robot)<br/>
-![](http://www.one-pieces-html5.com/source/node/robot/version1.4.0/index.jpg)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/index.jpg)<br/>
 3.输入你想要下载的网站链接<br/>
-![](http://www.one-pieces-html5.com/source/node/robot/version1.4.0/loading.jpg)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/loading.jpg)<br/>
 4.下载完成后，点击下载压缩包至本地<br/>
-![](http://www.one-pieces-html5.com/source/node/robot/version1.4.0/download.jpg)<br/>
-![](http://www.one-pieces-html5.com/source/node/robot/version1.4.0/end.jpg)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/download.jpg)<br/>
+![](http://www.one-pieces-html5.com/sources/node/robot/version1.4.0/end.jpg)<br/>
 
 ####版本:version 1.4.0
 #####升级内容:
 1.兼容"gbk"字符编码<br/>
 2.抓取后端页面自动保存成前端格式<br/>
 3.强化DOM页面的嗅探能力
+#####修复问题:
+暂无
 
 ####测试成功网站:
 1.http://www.one-pieces-html5.com/<br/>
